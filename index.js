@@ -37,6 +37,7 @@ class CountDown extends React.Component {
     onChange: PropTypes.func,
     onPress: PropTypes.func,
     onFinish: PropTypes.func,
+    containerStyle:PropTypes.object
   };
 
   state = {
@@ -191,7 +192,7 @@ class CountDown extends React.Component {
   };
 
   renderCountDown = () => {
-    const {timeToShow, timeLabels, showSeparator} = this.props;
+    const {timeToShow, timeLabels, showSeparator,containerStyle} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -199,7 +200,7 @@ class CountDown extends React.Component {
 
     return (
       <Component
-        style={styles.timeCont}
+        style={[styles.timeCont,containerStyle]}
         onPress={this.props.onPress}
       >
         {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
